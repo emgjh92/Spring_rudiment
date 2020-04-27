@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<!-- <bean id="tv" class="polymorphism.SamsungTv" init-method="initMethod" lazy-init="false" scope="prototype"></bean> -->
+<!-- 	<bean id="tv" class="polymorphism.LgTv"></bean>  -->
+<!-- lazy-init : 가동할 때 처음부터 인스턴스 생성?:false OR 필요할때 생성? : true -->
+<!-- scope : 기본값은 (안적더라도) 싱글톤 scope="singleton", 그러지 않으면 scope="prototype"==>사용할때 마다 새로운 주소값으로 인스턴스를 찍어냄-->
+<!--  	<baen id="xxx" class="polymorphism.LgTv"/>-->
+	 
+	<!-- <bean id="tv" class="polymorphism.SamsungTv"> -->
+	<!-- 	<constructor-arg ref="sony"></constructor-arg>  -->
+		<!-- constructor-arg = constructor argument = 생성자 매계값 -->
+	<!-- 	<constructor-arg value="10000"></constructor-arg>  -->
+		<!-- 두번째 주입 생성자 호출 -->
+	<!-- </bean> -->
+	
+	<!-- <bean id="tv" class="polymorphism.SamsungTv">-->
+		<!-- <property name="speaker" ref="sony"></property>--> <!-- DI 의 한 종류인 Setter 주입 -->
+	<!-- 
+	</bean>
+	<bean id="sony" class="polymorphism.SonySpeaker"></bean>
+	<bean id="apple" class="polymorphism.AppleSpeaker"></bean>
+	<bean id="ip_addr" class="java.lang.String">
+		<constructor-arg value="222.111.111.11"></constructor-arg>
+	</bean>
+	-->
+	
+	<context:component-scan base-package="polymorphism"></context:component-scan>
+	<!-- 어노테이션 방식 -->
+	
+	</beans>
