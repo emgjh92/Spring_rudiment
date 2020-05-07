@@ -1,5 +1,7 @@
 package com.ja.freeboard.member.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,4 +43,17 @@ public class MemberController {
 		return "redirect:./login_page.do";
 	}
 	
+	@RequestMapping("/login_process.do")
+	public String loginProcess(MemberVo memberVo, HttpSession session) {
+		
+		MemberVo userData = memberService.login(memberVo);
+		
+		if(userData == null) {
+			return "member/login_fail";
+		}else {
+			//로그인 성공
+			session.setAttribute("sessionUser", userData);
+			return "redirect:/board/main_page.do";
+		}
+	}
 }

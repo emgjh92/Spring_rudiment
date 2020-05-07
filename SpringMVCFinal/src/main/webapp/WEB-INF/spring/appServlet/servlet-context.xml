@@ -23,7 +23,6 @@
 	
 	<!-- 적절히 바꿔야됨 -->
 	<context:component-scan base-package="com.ja.freeboard.member.controller" />
-	
-	
+	<context:component-scan base-package="com.ja.freeboard.board.controller" />
 	
 </beans:beans>

@@ -24,9 +24,18 @@ public class MemberServiceImpl {
 		
 		//hobbySQLMapper.insert(member_key, member_hobby[0]);
 		
+		if(member_hobby==null) {
+			return;
+		}
+		
 		for(int hobby : member_hobby) {
 			hobbySQLMapper.insert(member_key, hobby);
 		}
+	}
+	
+	public MemberVo login(MemberVo vo) {
+		
+		return memberSQLMapper.selectByIdAndPw(vo);
 	}
 	
 }
