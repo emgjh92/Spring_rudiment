@@ -16,5 +16,5 @@ public interface BoardSQLMapper {
 	
 	public void update(BoardVo vo);
 	
-	
+	public void updateReadCount(int no);
 }

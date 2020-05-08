@@ -56,4 +56,12 @@ public class MemberController {
 			return "redirect:/board/main_page.do";
 		}
 	}
+	
+	@RequestMapping("/logout_process.do")
+	public String logoutProcess(HttpSession session) {
+		
+		session.invalidate();
+		
+		return "redirect:/board/main_page.do";
+	} //로그아웃
 }

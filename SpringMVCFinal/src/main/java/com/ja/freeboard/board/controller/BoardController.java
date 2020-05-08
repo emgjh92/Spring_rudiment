@@ -47,5 +47,42 @@ public class BoardController {
 		return "redirect:./main_page.do";
 	}
 	
+	@RequestMapping("/read_content_page.do")
+	public String readContentPage(int board_no, Model model) {
+		
+		
+		Map<String,Object> map = boardService.getBoard(board_no);
+		
+		model.addAttribute("aaaa",map);
+		
+		return "board/read_content_page";
+	}
+	
+	@RequestMapping("/delete_content_process.do")
+	public String deleteContent(int board_no) {
+		
+		boardService.deleteContent(board_no);
+		
+		return "redirect:/board/main_page.do";
+	}//페이지 삭제
+	
+	@RequestMapping("/update_content_page.do")
+	public String updateContentPage(int board_no, Model model) {
+		
+		
+		model.addAttribute("data",boardService.getBoard(board_no));
+		
+		return "/board/update_content_page";
+	} //페이지 업데이트(수정)
+	
+	
+	@RequestMapping("/update_content_process.do")
+	public String updateContentProcess(BoardVo vo) {
+		
+		boardService.updateContent(vo);
+		
+		return "redirect:/board/main_page.do";
+	}
+	
 
 }
