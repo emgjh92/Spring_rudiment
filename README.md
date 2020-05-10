@@ -45,3 +45,68 @@ Ctrl + s 로 설정 저장
 
 
 pom.xml, log4j.xml 은 서버를 localhost로 쓰므로 security alert 의 문제는 발생하지 않는다.
+
+
+
+
+
+
+Final Reference DB 테이블
+
+
+--멤버 
+DROP TABLE FB_Member;
+CREATE TABLE FB_Member(
+    member_no NUMBER(8) PRIMARY KEY,
+    member_id VARCHAR2(80),
+    member_pw VARCHAR2(100),
+    member_nick VARCHAR2(20),
+    member_sex VARCHAR2(4),
+    member_joindate DATE
+);
+
+DROP SEQUENCE FB_Member_seq;
+CREATE SEQUENCE FB_Member_seq;
+
+--취미 카테고리
+DROP TABLE FB_Hobby_category;
+CREATE TABLE FB_Hobby_category(
+    hobby_category_no NUMBER(4) PRIMARY KEY,
+    hobby_category_name VARCHAR2(20)
+);
+
+DROP SEQUENCE FB_Hobby_category_seq;
+CREATE SEQUENCE FB_Hobby_category_seq;
+
+INSERT INTO FB_Hobby_category VALUES(FB_Hobby_category_seq.nextval,'농구');
+INSERT INTO FB_Hobby_category VALUES(FB_Hobby_category_seq.nextval,'축구');
+INSERT INTO FB_Hobby_category VALUES(FB_Hobby_category_seq.nextval,'야구');
+INSERT INTO FB_Hobby_category VALUES(FB_Hobby_category_seq.nextval,'독서');
+
+COMMIT;
+
+
+--멤버 취미
+DROP TABLE FB_Hobby;
+CREATE TABLE FB_Hobby(
+    hobby_no NUMBER(8) PRIMARY KEY,
+    member_no NUMBER(8),
+    hobby_category_no NUMBER(8)
+);
+
+DROP SEQUENCE FB_Hobby_seq;
+CREATE SEQUENCE FB_Hobby_seq;
+
+--게시판 테이블
+DROP TABLE FB_Board;
+CREATE TABLE FB_Board(
+    board_no NUMBER(8) PRIMARY KEY,
+    member_no NUMBER(8),
+    board_title VARCHAR2(200),
+    board_content VARCHAR2(1000),
+    board_readcount NUMBER(8),
+    board_writedate DATE
+);
+
+DROP SEQUENCE FB_Board_seq;
+CREATE SEQUENCE FB_Board_seq;
