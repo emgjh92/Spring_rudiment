@@ -1,0 +1,21 @@
+DROP TABLE FB_Upload_File;
+
+CREATE TABLE FB_Upload_File(
+
+    file_no NUMBER(8) PRIMARY KEY,
+
+    board_no NUMBER(8),
+
+    file_link_path VARCHAR2(100),
+
+    file_real_path VARCHAR2(200),
+
+    board_upload_date DATE
+
+);
+
+ 
+
+DROP SEQUENCE FB_Upload_File_seq;
+
+CREATE SEQUENCE FB_Upload_File_seq;
