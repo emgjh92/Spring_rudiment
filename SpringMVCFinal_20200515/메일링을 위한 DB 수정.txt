@@ -1,0 +1,9 @@
+CREATE TABLE FB_Member_Auth(
+    auth_no NUMBER(8) PRIMARY KEY,
+    member_no NUMBER(8),
+    auth_certification VARCHAR2(4),
+    auth_key VARCHAR2(100)
+);
+
+DROP SEQUENCE FB_Member_Auth_seq;
+CREATE SEQUENCE FB_Member_Auth_seq;
