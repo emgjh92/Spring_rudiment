@@ -126,3 +126,16 @@ CREATE TABLE FB_Member_Auth(
 
 DROP SEQUENCE FB_Member_Auth_seq;
 CREATE SEQUENCE FB_Member_Auth_seq;
+
+
+
+
+
+
+
+
+
+--MVC 모델 파일 생성 순서
+
+
+VO =>SQLMapper=>SQLMapper.xml=>Service=>Controller
