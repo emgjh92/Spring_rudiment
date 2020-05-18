@@ -1,0 +1,11 @@
+--댓글
+DROP TABLE FB_Reply;
+CREATE TABLE FB_Reply(
+    reply_no NUMBER(8) PRIMARY KEY,
+    board_no NUMBER(8),
+    member_no NUMBER(8),
+    reply_content VARCHAR2(1000),
+    reply_writedate DATE
+);
+DROP SEQUENCE FB_Reply_seq;
+CREATE SEQUENCE FB_Reply_seq;

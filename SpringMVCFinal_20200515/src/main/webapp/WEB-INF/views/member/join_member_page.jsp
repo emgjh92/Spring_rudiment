@@ -6,9 +6,65 @@
 <meta charset="UTF-8">
 <%--bootstrap CSS 코드 --%>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
 <title>Insert title here</title>
 <!-- 유효성 검사 -->
 <script>
+
+	var isIdConfirmID = false;
+	
+	
+	function confirmId(){ //아이디 중복 검사
+	    
+	    var inputValue = document.getElementById("member_id").value;
+	    
+	    var xmlhttp = new XMLHttpRequest();
+	    
+	    xmlhttp.onreadystatechange = function(){
+	       if(xmlhttp.readyState==4 && xmlhttp.status == 200){
+	    	   
+				if(xmlhttp.responseText == 'true'){
+					alert("사용 가능한 아이디 입니다");
+					isIdConfirmID = true;
+				}else{
+					isIdConfirmID = false;
+					alert("사용 불가능한 아이디 입니다");
+				}
+	       }//성공한 경우
+
+	    };
+	    
+	    xmlhttp.open("post","./confirmId.do", true);
+	    
+	    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	    
+	    xmlhttp.send("id=" + inputValue);
+	    
+	 }
+	
+function confirmId_jQuery(){ //confirmId의 제이쿼리 버전
+		
+		var inputValue = $("#member_id").val();
+		
+		$.ajax({
+			type : 'post',
+			url : './confirmId.do',
+			data : {'id' : inputValue},
+			success : function(result){
+				if(result == 'true'){
+					alert("사용 가능한 아이디 입니다.");
+					isConfirmID = true;
+				}else{
+					alert("사용 불가능한 아이디 입니다.");
+					isConfirmID = false;
+				}
+			}
+		});
+
+	}
+	
+	
 	function frm_submit() {
 		
 		// form tag 가져오기
@@ -57,12 +113,16 @@
 			return;
 		}
 		
+		if(isConfirmID != true){
+			alert("아이디 중복 체크를 해 주셔야 합니다.");
+		}
+		
 		// input type="submit"
 		frm.submit();	// 회원가입 버튼 눌렀을 때 전송됨 	
 		
 	}
-</script>
-<script type="text/javascript">
+
+<!--
 function call_ajax(){
 	//AJAX 호출...코드 시작
 	var xmlhttp = new XMLHttpRequest();
@@ -99,6 +159,7 @@ function call_ajax(){
 
 	xmlhttp.send("id=s001&page=3");	
 }
+-->
 
 </script>
 </head>
@@ -116,7 +177,7 @@ function call_ajax(){
 		<div class="row">	<!-- ID -->
 			<div class="col-3">ID(E-mail)</div>
 			<div class="col"><input id="member_id" class="form-control" type="text" name="member_id" ></div>
-		<input type="button" value="아이디 확인" onclick="call_ajax()">
+		<input type="button" onclick="confirmId_jQuery()" value="아이디 확인"  >
 		</div>	
 		
 		<div class="row mt-1">	 <!-- PW -->
@@ -174,7 +235,6 @@ function call_ajax(){
 </div>
 
 <%--bootstrap JS 코드 --%>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>

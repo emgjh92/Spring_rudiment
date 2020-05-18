@@ -17,6 +17,8 @@ public class BoardServiceImpl {
 	private MemberSQLMapper memberSQLMapper;
 	@Autowired
 	private UploadFileSQLMapper uploadFileSQLMapper;
+	@Autowired
+	private ReplySQLMapper replySQLMapper;
 	
 	public void writeContent(BoardVo boardVo, List<UploadFileVo> fileVoList) {
 		
@@ -101,4 +103,28 @@ public class BoardServiceImpl {
 		
 		boardSQLMapper.deleteByNo(board_no);
 	}
+	
+	public List<Map<String,Object>> getReplyList(int board_no){ //리플기능 서비스
+		
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+		
+		List<ReplyVo> replyVoList = replySQLMapper.selectByBoardNo(board_no);
+		
+		for(ReplyVo replyVo : replyVoList ) {
+			MemberVo memberVo =	memberSQLMapper.selectByNo(replyVo.getMember_no());
+			Map<String,Object> map = new HashMap<String, Object>();
+			
+			map.put("memberVo", memberVo);
+			map.put("replyVo", replyVo);
+			
+			list.add(map);
+		}
+		
+		return list;
+	}
+	
+	public void writeReply(ReplyVo replyVo) {//리플기능(쓰기) 서비스
+		replySQLMapper.insert(replyVo);
+	}
+	
 }

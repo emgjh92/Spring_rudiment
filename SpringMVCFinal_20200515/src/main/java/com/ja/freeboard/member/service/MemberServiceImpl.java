@@ -143,4 +143,12 @@ public class MemberServiceImpl {
 		
 		authSQLMapper.update(key);
 	}
+	
+	public boolean confirmId(String id) {
+		if(memberSQLMapper.selectById(id) ==null) {
+			return true; //사용가능
+		}else {
+			return false; //사용 불가능 (아이디 중복됨)
+			}
+	}
 }

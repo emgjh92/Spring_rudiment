@@ -23,5 +23,7 @@ public interface MemberSQLMapper {
 	@Select("SELECT* FROM FB_Member WHERE member_no=#{member_no}")
 	public MemberVo selectByNo(int member_no);
 	
+	@Select("SELECT* FROM FB_Member WHERE member_id=#{id}")
+	public MemberVo selectById(String id);
 	
 }

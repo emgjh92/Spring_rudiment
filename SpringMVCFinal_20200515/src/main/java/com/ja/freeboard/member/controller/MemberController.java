@@ -11,6 +11,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ja.freeboard.member.service.MemberServiceImpl;
 import com.ja.freeboard.vo.*;
@@ -25,7 +26,7 @@ public class MemberController {
 	@Autowired //메일 발송 용
 	private JavaMailSender mailSender;
 	
-	
+
 	@RequestMapping("/login_page.do")
 	public String loginPage() {
 		
@@ -97,7 +98,18 @@ public class MemberController {
 		return "member/testAjax";
 	}
 	
-	
+	@RequestMapping("/confirmId.do")
+	@ResponseBody//포워딩 하지 않고 넘어온 값(문자 자체)자체를 넘겨버림
+	public String confirmId(String id) {
+		
+		System.out.println("넘어온 값 :"+id);
+		if(memberService.confirmId(id)) {
+			return "true";
+		}else {
+			return "false";
+		}
+
+	}
 }
 
 
